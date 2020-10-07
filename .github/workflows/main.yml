@@ -21,7 +21,7 @@ env:
 #
 steps:
   # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-  - uses: actions/checkout@v2
+  - uses: actions/checkout@master
 
 - name: setup-r
 uses: r-lib/actions/setup-r@v1
