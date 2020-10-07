@@ -23,22 +23,22 @@ steps:
   # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
   - uses: actions/checkout@master
 
-- name: setup-r
-uses: r-lib/actions/setup-r@v1
-with:
-  r-version: '4.0.2'
-# install renv package
-- run: R -e 'install.packages("renv")'
-# set up cache
-- name: Cache packages
-uses: actions/cache@v1
-with:
-  path: ${{ env.RENV_PATHS_ROOT }}
-key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-restore-keys: |-
-  ${{ runner.os }}-renv-
-  - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
-# install c++ dependencies and install necessary packages
-- run: R -e 'renv::restore()'
-# execute Rscript
-- run: Rscript email.R
+  - name: setup-r
+    uses: r-lib/actions/setup-r@v1
+    with:
+      r-version: '4.0.2'
+  # install renv package
+  - run: R -e 'install.packages("renv")'
+  # set up cache
+  - name: Cache packages
+    uses: actions/cache@v1
+    with:
+      path: ${{ env.RENV_PATHS_ROOT }}
+    key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+    restore-keys: |-
+      ${{ runner.os }}-renv-
+      - run: sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev
+  # install c++ dependencies and install necessary packages
+  - run: R -e 'renv::restore()'
+  # execute Rscript
+  - run: Rscript email.R
