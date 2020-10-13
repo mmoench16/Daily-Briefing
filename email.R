@@ -16,7 +16,7 @@ htmlCode <- whisker.render(htmlCode, c(BBCWeatherData, DWNews, GuardianNews, Cyc
 email <- envelope() %>%
   from(Sys.getenv("USERNAME")) %>%
   to(Sys.getenv("RECIPIENT")) %>%
-  subject("Test 3") %>%
+  subject("Test") %>%
   html(htmlCode)
 
 smtp <- server(host = "smtp.mail.yahoo.com",
