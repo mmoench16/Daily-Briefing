@@ -24,6 +24,6 @@ smtp <- server(host = "smtp.mail.yahoo.com",
                username = Sys.getenv("USERNAME"),
                password = Sys.getenv("PASSWORD"))
 
-smtp(email)
+try(smtp(email), silent = T)
 
 # email
