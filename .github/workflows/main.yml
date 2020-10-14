@@ -2,9 +2,9 @@
 
 name: daily_briefing
 
-on: [workflow_dispatch]
-  # schedule:
-  # - cron: '45 06 * * *'
+on:
+  schedule:
+  - cron: '45 06 * * *'
   # [workflow_dispatch]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
