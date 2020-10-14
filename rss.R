@@ -1,5 +1,6 @@
 library(tidyRSS)
-library(tidyverse)
+library(dplyr)
+library(stringr)
 
 #BBC <- tidyfeed("http://feeds.bbci.co.uk/news/rss.xml")
 #BBCWeather <- tidyfeed("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2635442")
@@ -74,4 +75,16 @@ getGuardianNews <- function() {
   rm(newsGuardian)
   
   newsGuardianData
+}
+
+getQuote <- function() {
+  qod <- tidyfeed("http://feeds.feedburner.com/theysaidso/qod") %>% 
+    slice(1:1) %>% 
+    select(item_description)
+  
+  quote_of_day <- as.list(qod$item_description)
+  names(quote_of_day) <- c("quote1")
+  
+  rm(qod)
+  quote_of_day
 }
