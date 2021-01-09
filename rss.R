@@ -19,12 +19,14 @@ library(stringr)
   
 # getWeatherData retrieves weather information from the BBC weather feed and returns a list with a 3-day forecast
 getWeatherData <- function() {
-  BBCWeather <- tidyfeed("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2635442") %>% 
+  BBCWeather <- tidyfeed("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2953324") %>% 
     select(-c(feed_description, feed_language, item_guid)) %>% 
     mutate(weather_forecast = sapply(strsplit(item_title, ","), getElement, 1) %>% 
              paste0(", ", item_description)) %>%
     mutate(weather_forecast = stringr::str_remove_all(weather_forecast, regex("\\(\\d{2}°F\\)")),
-           weather_forecast = stringr::str_replace(weather_forecast, regex("\\w+:"), paste0("<b>", str_extract(weather_forecast, "\\w+:"), "</b>")))
+           weather_forecast = stringr::str_replace(weather_forecast, regex("\\w+:"), paste0("<b>", str_extract(weather_forecast, "\\w+:"), "</b>")),
+           weather_forecast = stringr::str_replace(weather_forecast, regex(", Wind Direction:"), paste0("<span class='read-more-target'>", str_extract(weather_forecast, ", Wind Direction:"))),
+           weather_forecast = paste0(weather_forecast, "</span>"))
   
   weatherData <- as.list(BBCWeather$weather_forecast)
   names(weatherData) <- c("weather1", "weather2", "weather3")
