@@ -37,7 +37,7 @@ getWeatherData <- function() {
 }
 
 getCyclingNews <- function() {
-  cyclingNews <- tidyfeed("https://www.cyclingweekly.com/news/rss") %>% 
+  cyclingNews <- tidyfeed("https://www.cyclingweekly.com/feed") %>% 
     slice(1:5) %>% 
     select(item_title, item_guid) %>% 
     mutate(item_title = trimws(item_title, which = ("right")),
