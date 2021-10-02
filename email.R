@@ -28,5 +28,5 @@ smtp <- server(host = "smtp.mail.yahoo.com",
 
 try(smtp(email), silent = T)
 # smtp(email)
-# email
+# email 
 
