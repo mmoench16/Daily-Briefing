@@ -29,4 +29,4 @@ smtp <- server(host = "smtp.mail.yahoo.com",
 try(smtp(email), silent = T)
 # smtp(email)
 # email
-# just adding so I can push to GitHub again to kick of GH Actions
+
